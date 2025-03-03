@@ -157,18 +157,83 @@ if ( ! function_exists( 'twentytwentyfive_format_binding' ) ) :
 	}
 endif;
 
-function custom_3d_model_script() {
-    if (is_front_page()) {  // Only load on the homepage
-        // wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-		wp_enqueue_script(
-			'three-js', // Handle for the script
-			'https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js', // URL of the script
-			array(), // No dependencies
-			'null', // Version of the script
-			true // Load the script in the footer (set to true if you want it in the header)
-		);
-		wp_enqueue_script('glb-loader', 'https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js', array(), null, true);
-        wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'glb-loader'), null, true);
-    }
+// function custom_3d_model_script() {
+//     if (is_front_page()) {  // Only load on the homepage
+//         // wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+// 		wp_enqueue_script(
+// 			'three-js', // Handle for the script
+// 			'https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js', // URL of the script
+// 			array(), // No dependencies
+// 			'null', // Version of the script
+// 			true // Load the script in the footer (set to true if you want it in the header)
+// 		);
+// 		wp_enqueue_script('glb-loader', 'https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js', array(), null, true);
+//         wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'glb-loader'), null, true);
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'custom_3d_model_script');
+
+// function enqueue_threejs_scripts() {
+//     // Load Three.js from a CDN
+//     wp_enqueue_script('three-js', 'https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js', array(), null, true);
+
+//     // Load the GLTFLoader, EffectComposer, RenderPass, and UnrealBloomPass from a CDN
+//     wp_enqueue_script('three-gltfloader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/GLTFLoader.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-effectcomposer', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-renderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/RenderPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-unrealbloompass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/UnrealBloomPass.js', array('three-js'), null, true);
+
+//     // Load your 3D model script
+//     wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'three-gltfloader', 'three-effectcomposer', 'three-renderpass', 'three-unrealbloompass'), null, true);
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_threejs_scripts');
+
+// function enqueue_threejs_scripts() {
+//     // Load Three.js from a CDN
+//     wp_enqueue_script('three-js', 'https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js', array(), null, true);
+
+//     // Load the GLTFLoader, EffectComposer, RenderPass, and UnrealBloomPass from a CDN
+//     wp_enqueue_script('three-gltfloader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/GLTFLoader.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-effectcomposer', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-renderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/RenderPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-unrealbloompass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/UnrealBloomPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-copyshader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js', array('three-js'), null, true);
+
+//     // Load your 3D model script
+//     wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'three-gltfloader', 'three-effectcomposer', 'three-renderpass', 'three-unrealbloompass', 'three-copyshader'), null, true);
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_threejs_scripts');
+// function enqueue_threejs_scripts() {
+//     // Load Three.js from a CDN
+//     wp_enqueue_script('three-js', 'https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js', array(), null, true);
+
+//     // Load the GLTFLoader, EffectComposer, RenderPass, UnrealBloomPass, ShaderPass, and CopyShader from a CDN
+//     wp_enqueue_script('three-gltfloader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/GLTFLoader.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-effectcomposer', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-renderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/RenderPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-unrealbloompass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/UnrealBloomPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-shaderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/ShaderPass.js', array('three-js'), null, true);
+//     wp_enqueue_script('three-copyshader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js', array('three-js'), null, true);
+
+//     // Load your 3D model script
+//     wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'three-gltfloader', 'three-effectcomposer', 'three-renderpass', 'three-unrealbloompass', 'three-shaderpass', 'three-copyshader'), null, true);
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_threejs_scripts');
+
+function enqueue_threejs_scripts() {
+    // Load Three.js from a CDN
+    wp_enqueue_script('three-js', 'https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js', array(), null, true);
+
+    // Load the GLTFLoader, EffectComposer, RenderPass, UnrealBloomPass, ShaderPass, CopyShader, and LuminosityHighPassShader from a CDN
+    wp_enqueue_script('three-gltfloader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/GLTFLoader.js', array('three-js'), null, true);
+    wp_enqueue_script('three-effectcomposer', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js', array('three-js'), null, true);
+    wp_enqueue_script('three-renderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/RenderPass.js', array('three-js'), null, true);
+    wp_enqueue_script('three-unrealbloompass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/UnrealBloomPass.js', array('three-js'), null, true);
+    wp_enqueue_script('three-shaderpass', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/ShaderPass.js', array('three-js'), null, true);
+    wp_enqueue_script('three-copyshader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js', array('three-js'), null, true);
+    wp_enqueue_script('three-luminosityhighpassshader', 'https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/LuminosityHighPassShader.js', array('three-js'), null, true);
+
+    // Load your 3D model script
+    wp_enqueue_script('3d-model-js', get_template_directory_uri() . '/assets/js/3d-model.js', array('three-js', 'three-gltfloader', 'three-effectcomposer', 'three-renderpass', 'three-unrealbloompass', 'three-shaderpass', 'three-copyshader', 'three-luminosityhighpassshader'), null, true);
 }
-add_action('wp_enqueue_scripts', 'custom_3d_model_script');
+add_action('wp_enqueue_scripts', 'enqueue_threejs_scripts');
