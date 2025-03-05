@@ -100,8 +100,6 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
 	display: block;
 }
 
-
-
 body {
 	background-color: #000000;
 	color: #ffffff;
@@ -114,5 +112,5 @@ body {
     display: block; /* Remove extra spacing */
     width: 100vw;   /* Full viewport width */
     /* height: 120vh;  Full viewport height */
-	height: calc(100vh + 400px); /* 400px taller than the viewport */
+	height: calc(100vh + 20%);
 }

@@ -22,15 +22,17 @@ function init() {
     // Scene setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 3);
+    // camera.position.set(0, 0, 3);
+    camera.position.set(0, -1, 3);  // Camera moved lower
 
     // Select the predefined canvas by ID
     const canvas = document.getElementById('modelCanvas');
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 
     // Set the canvas height to 120vh (or whatever desired height)
-    canvas.height = window.innerHeight * 1.2;  // 120% of the viewport height
+    canvas.height = window.innerHeight * 2;  // 120% of the viewport height
     canvas.width = window.innerWidth;  // Full width
+
 
     // Set the renderer size to match the updated canvas size
     renderer.setSize(canvas.width, canvas.height);
@@ -46,6 +48,9 @@ function init() {
         galaxy.rotation.x = Math.PI / 6; // 30-degree tilt
         scene.add(galaxy);
         processGalaxy(gltf);
+
+
+
     });
 
     // Post-processing
@@ -94,7 +99,7 @@ function processGalaxy(gltf) {
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const starMaterial = new THREE.PointsMaterial({
-        size: 0.007, // Closer to the R3F version
+        size: 0.00, // Closer to the R3F version
         map: starTexture,
         vertexColors: true,
         transparent: true,
