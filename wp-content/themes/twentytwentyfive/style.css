@@ -61,10 +61,21 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
 }
 
 body {
-	color: white;
+	background-color: #000000;
+	color: #ffffff;
 }
 
 .nav {
-	z-index: 2;
+	/* z-index: 2; */
 	position: fixed;
+}
+
+#modelCanvas {
+    display: block; /* Remove extra spacing */
+    width: 100vw;   /* Full viewport width */
+    height: 100vh;  /* Full viewport height */
+    /* position: absolute; Ensure it stays in place */
+    /* top: 0; */
+    /* left: 0; */
+    /* z-index: -1; Move it behind other content */
 }

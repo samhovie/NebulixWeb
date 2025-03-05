@@ -24,17 +24,32 @@ function init() {
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 3);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+    // renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    // document.body.appendChild(renderer.domElement);
+
+    // Select the predefined canvas by ID
+    const canvas = document.getElementById('modelCanvas');
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+
+    // Set the size of the renderer to match the canvas size
+    // renderer.setSize(canvas.width, canvas.height);
+    // Update renderer size according to canvas size
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // document.body.appendChild(canvas); // Optional: append to document body if needed
+
+
 
     // Lighting
     galaxyCenterLight = new THREE.PointLight(0xffffff, 0.5);
     scene.add(galaxyCenterLight);
 
-    // Load star texture
-    const textureLoader = new THREE.TextureLoader();
-    starTexture = textureLoader.load('/star.png');
+    // Load star texture FIX
+    // const textureLoader = new THREE.TextureLoader();
+    // starTexture = textureLoader.load('/star.png');
 
     // Load model
     const loader = new THREE.GLTFLoader();
@@ -91,7 +106,7 @@ function processGalaxy(gltf) {
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const starMaterial = new THREE.PointsMaterial({
-        size: 0.01, // Closer to the R3F version
+        size: 0.007, // Closer to the R3F version
         map: starTexture,
         vertexColors: true,
         transparent: true,
