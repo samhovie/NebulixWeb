@@ -108,9 +108,39 @@ body {
 	position: fixed;
 }
 
+/* #modelCanvas {
+  display: block;
+  width: 100vw;
+  height: calc(100vh + 20%);
+  z-index: -1;
+} */
+
+/* Set up canvas behind everything */
 #modelCanvas {
-    display: block; /* Remove extra spacing */
-    width: 100vw;   /* Full viewport width */
-    /* height: 120vh;  Full viewport height */
-	height: calc(100vh + 20%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;  /* Ensure canvas fills the viewport and a bit more */
+  z-index: -1;  /* Put the canvas behind everything else */
+}
+
+/* Ensure content flows normally */
+.content {
+  position: relative;
+  z-index: 0;  /* Ensure content is above the canvas */
+}
+
+/* Style the footer */
+footer {
+  position: absolute;  /* Normal flow, will scroll with the page */
+  bottom: -100vh;
+  width: 100%;
+  z-index: 1;  /* Ensure footer is above canvas */
+  background-color: rgba(0, 0, 0, 0.0);  /* Optional: Add a background color */
+  color: white;     /* Optional: Set text color for visibility */
+  padding: 20px;    /* Optional: Add some padding */
+  text-align: center;
+  margin-top: 20px;  /* Optional: Add space between footer and last content */
+  margin-bottom: 0;  /* Footer should be at the bottom */
 }
