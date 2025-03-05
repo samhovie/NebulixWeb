@@ -18,6 +18,46 @@ Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, feature
  * Link styles
  * https://github.com/WordPress/gutenberg/issues/42319
  */
+ /* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
 a {
 	text-decoration-thickness: 1px !important;
 	text-underline-offset: .1em;
@@ -60,22 +100,19 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
 	display: block;
 }
 
+
+
 body {
 	background-color: #000000;
 	color: #ffffff;
 }
-
 .nav {
-	/* z-index: 2; */
 	position: fixed;
 }
 
 #modelCanvas {
     display: block; /* Remove extra spacing */
     width: 100vw;   /* Full viewport width */
-    height: 100vh;  /* Full viewport height */
-    /* position: absolute; Ensure it stays in place */
-    /* top: 0; */
-    /* left: 0; */
-    /* z-index: -1; Move it behind other content */
+    /* height: 120vh;  Full viewport height */
+	height: calc(100vh + 400px); /* 400px taller than the viewport */
 }

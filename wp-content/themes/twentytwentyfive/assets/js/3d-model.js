@@ -24,32 +24,20 @@ function init() {
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 3);
 
-
-    // renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild(renderer.domElement);
-
     // Select the predefined canvas by ID
     const canvas = document.getElementById('modelCanvas');
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 
-    // Set the size of the renderer to match the canvas size
-    // renderer.setSize(canvas.width, canvas.height);
-    // Update renderer size according to canvas size
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    // document.body.appendChild(canvas); // Optional: append to document body if needed
+    // Set the canvas height to 120vh (or whatever desired height)
+    canvas.height = window.innerHeight * 1.2;  // 120% of the viewport height
+    canvas.width = window.innerWidth;  // Full width
 
-
+    // Set the renderer size to match the updated canvas size
+    renderer.setSize(canvas.width, canvas.height);
 
     // Lighting
     galaxyCenterLight = new THREE.PointLight(0xffffff, 0.5);
     scene.add(galaxyCenterLight);
-
-    // Load star texture FIX
-    // const textureLoader = new THREE.TextureLoader();
-    // starTexture = textureLoader.load('/star.png');
 
     // Load model
     const loader = new THREE.GLTFLoader();
@@ -119,10 +107,18 @@ function processGalaxy(gltf) {
 }
 
 function onWindowResize() {
+    // Update camera aspect ratio and projection matrix
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
+
+    // Update canvas size
+    const canvas = document.getElementById('modelCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 1.2;  // 120% of the viewport height
+
+    // Update renderer size
+    renderer.setSize(canvas.width, canvas.height);
+    composer.setSize(canvas.width, canvas.height);
 }
 
 function onMouseMove(event) {
